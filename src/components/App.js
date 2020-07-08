@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import "../style/App.css";
 import Home from "./pages/Home";
 import Create from "./pages/Create";
 import Palette from "./palettes/Palette";
