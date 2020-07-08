@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import Create from "./pages/Create";
-import Palette from "./pages/Palette";
-import Movie from "./pages/Movie";
+import Palette from "./palettes/Palette";
+import Movie from "./movies/Movie";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
