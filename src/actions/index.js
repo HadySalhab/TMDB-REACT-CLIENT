@@ -1,14 +1,24 @@
-import { GET_PALETTES } from "./types";
+import { GET_PALETTES, OPEN_DIALOG, CLOSE_DIALOG } from "./types";
 import seedMovies from "../data/seedMovies";
 export const getPalettes = () => {
 	let palettes;
-	try {
+	if (window.localStorage.getItem("palettes")) {
 		palettes = JSON.parse(window.localStorage.getItem("palettes"));
-	} catch (e) {
+	} else {
 		palettes = seedMovies;
 	}
 	return {
 		type: GET_PALETTES,
 		payload: palettes,
+	};
+};
+export const openDialog = () => {
+	return {
+		type: OPEN_DIALOG,
+	};
+};
+export const closeDialog = () => {
+	return {
+		type: CLOSE_DIALOG,
 	};
 };
