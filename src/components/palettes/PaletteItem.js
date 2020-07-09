@@ -1,18 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import DeleteIcon from "@material-ui/icons/Delete";
-import AvatarDialog from "../layout/AvatarDialog";
 import { withStyles } from "@material-ui/styles";
 import styles from "../../style/PaletteItem";
-import { openDialog } from "../../actions";
-import { connect } from "react-redux";
+import useDialog from "../../hooks/useDialog";
+import DeleteDialog from "../layout/AvatarDialog";
 
-const PaletteItem = ({ classes, paletteName, emoji, movies, openDialog }) => {
-	const onMiniPaletteClicked = (event) => {};
+const PaletteItem = ({
+	classes,
+	paletteName,
+	emoji,
+	movies,
+	onItemClick,
+	id,
+}) => {
+	const { isOpen, showDialog, hideDialog } = useDialog();
 	const deletePalette = () => {};
 
 	return (
 		<div className={classes.root}>
-			<div className={classes.movies} onClick={onMiniPaletteClicked}>
+			<div
+				className={classes.movies}
+				onClick={() => {
+					onItemClick(id);
+				}}
+			>
 				{/* {renderMovies()} */}
 			</div>
 			<div className={classes.text}>
@@ -20,14 +31,21 @@ const PaletteItem = ({ classes, paletteName, emoji, movies, openDialog }) => {
 					{paletteName}
 					<span className={classes.emojis}>
 						<span className={classes.emoji}>{emoji}</span>
-						<DeleteIcon onClick={openDialog} className={classes.deleteIcon} />
+						<DeleteIcon onClick={showDialog} className={classes.deleteIcon} />
 					</span>
 				</h5>
 			</div>
-			<AvatarDialog />
+			<DeleteDialog
+				isOpen={isOpen}
+				onClose={hideDialog}
+				title="Delete This Palette?"
+				confirmTxt="Delete"
+				declineTxt="cancel"
+				onConfirm={hideDialog}
+				onDecline={hideDialog}
+			/>
 		</div>
 	);
 };
 
-const StyledPaletteItem = withStyles(styles)(PaletteItem);
-export default connect(null, { openDialog })(StyledPaletteItem);
+export default withStyles(styles)(PaletteItem);

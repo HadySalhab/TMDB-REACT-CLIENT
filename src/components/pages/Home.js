@@ -6,10 +6,15 @@ import { connect } from "react-redux";
 import { getPalettes } from "../../actions";
 import styles from "../../style/Home";
 import PaletteItem from "../palettes/PaletteItem";
-const Home = ({ classes, palettes, getPalettes }) => {
+const Home = (props) => {
+	const { classes, palettes, getPalettes } = props;
 	useEffect(() => {
 		getPalettes();
 	}, [getPalettes]);
+
+	const onPaletteItemClick = (id) => {
+		props.history.push(`./palette/${id}`);
+	};
 
 	const renderNav = () => (
 		<nav className={classes.nav}>
@@ -29,7 +34,11 @@ const Home = ({ classes, palettes, getPalettes }) => {
 	const renderPalettes = () => {
 		if (palettes.length > 0) {
 			return palettes.map((palette) => (
-				<PaletteItem {...palette} key={palette.id} />
+				<PaletteItem
+					{...palette}
+					key={palette.id}
+					onItemClick={onPaletteItemClick}
+				/>
 			));
 		}
 	};
