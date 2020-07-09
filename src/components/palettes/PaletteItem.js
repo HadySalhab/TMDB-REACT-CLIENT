@@ -4,6 +4,8 @@ import { withStyles } from "@material-ui/styles";
 import styles from "../../style/PaletteItem";
 import useDialog from "../../hooks/useDialog";
 import DeleteDialog from "../layout/AvatarDialog";
+import { connect } from "react-redux";
+import { deletePalette } from "../../actions";
 
 const PaletteItem = ({
 	classes,
@@ -11,10 +13,10 @@ const PaletteItem = ({
 	emoji,
 	movies,
 	onItemClick,
+	deletePalette,
 	id,
 }) => {
 	const { isOpen, showDialog, hideDialog } = useDialog();
-	const deletePalette = () => {};
 
 	return (
 		<div className={classes.root}>
@@ -41,11 +43,15 @@ const PaletteItem = ({
 				title="Delete This Palette?"
 				confirmTxt="Delete"
 				declineTxt="cancel"
-				onConfirm={hideDialog}
+				onConfirm={() => {
+					deletePalette(id);
+					hideDialog();
+				}}
 				onDecline={hideDialog}
 			/>
 		</div>
 	);
 };
 
-export default withStyles(styles)(PaletteItem);
+const StyledPaletteItem = withStyles(styles)(PaletteItem);
+export default connect(null, { deletePalette })(StyledPaletteItem);
