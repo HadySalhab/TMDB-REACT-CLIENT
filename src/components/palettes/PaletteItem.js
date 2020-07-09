@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/styles";
 import styles from "../../style/PaletteItem";
 import useDialog from "../../hooks/useDialog";
 import DeleteDialog from "../layout/AvatarDialog";
+import { IMAGE_W185 } from "../../data/Constants";
 import { connect } from "react-redux";
 import { deletePalette } from "../../actions";
 
@@ -17,6 +18,20 @@ const PaletteItem = ({
 	id,
 }) => {
 	const { isOpen, showDialog, hideDialog } = useDialog();
+	const renderMovies = () => {
+		return movies.map((movie) => {
+			return (
+				<div
+					className={classes.miniMovie}
+					style={{
+						background: `url(${
+							IMAGE_W185 + movie.poster_path
+						}) center top/cover no-repeat`,
+					}}
+				></div>
+			);
+		});
+	};
 
 	return (
 		<div className={classes.root}>
@@ -26,7 +41,7 @@ const PaletteItem = ({
 					onItemClick(id);
 				}}
 			>
-				{/* {renderMovies()} */}
+				{renderMovies()}
 			</div>
 			<div className={classes.text}>
 				<h5 className={classes.title}>
