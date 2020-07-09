@@ -22,6 +22,7 @@ const PaletteItem = ({
 		return movies.map((movie) => {
 			return (
 				<div
+					key={movie.id}
 					className={classes.miniMovie}
 					style={{
 						background: `url(${
