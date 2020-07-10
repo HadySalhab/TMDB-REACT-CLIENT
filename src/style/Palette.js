@@ -41,5 +41,8 @@ const styles = {
 	footerEmoji: {
 		marginLeft: "1rem",
 	},
+	message: {
+		fontSize: "1.5rem",
+	},
 };
 export default styles;

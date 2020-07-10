@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 import slugify from "slugify";
+import useSnack from "../../hooks/useSnack";
 import { IMAGE_W185 } from "../../data/Constants";
 import Button from "@material-ui/core/Button";
 import styles from "../../style/Palette";
 import Navbar from "../layout/Navbar";
 import Spinner from "../layout/Spinner";
+import MSnackbar from "../layout/Snackbar";
 import { getPalettes } from "../../actions";
 import { connect } from "react-redux";
 import { sortMoviesBy } from "../../util/sortMoviesBy";
@@ -15,6 +17,7 @@ import MovieCard from "../movies/MovieCard";
 const Palette = (props) => {
 	const { classes, getPalettes } = props;
 	const [sort, setSort] = useState("Original");
+	const { isOpen, showSnack, hideSnack } = useSnack(false);
 
 	useEffect(() => {
 		getPalettes(); //Router Components should Stand Alone
@@ -22,6 +25,7 @@ const Palette = (props) => {
 
 	const onSortChange = (value) => {
 		setSort(value);
+		showSnack();
 	};
 
 	const renderMovies = () => {
@@ -86,11 +90,17 @@ const Palette = (props) => {
 			</div>
 			{renderFooter()}
 
-			{/* <SnackbarMUI
-				sortBy={sortBy}
-				isSnackbarOpen={isSnackBarOpen}
-				closeSnackbar={closeSnackBar}
-			/> */}
+			<MSnackbar
+				msgComp={
+					<span id="message-id" className={classes.message}>
+						Updated: {sort}
+					</span>
+				}
+				duration={3000}
+				open={isOpen}
+				onClose={hideSnack}
+				onClick={hideSnack}
+			/>
 		</div>
 	);
 };
