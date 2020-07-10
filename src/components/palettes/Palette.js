@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
+import slugify from "slugify";
 import { IMAGE_W185 } from "../../data/Constants";
 import Button from "@material-ui/core/Button";
 import styles from "../../style/Palette";
@@ -33,6 +34,17 @@ const Palette = (props) => {
 					key={movie.id}
 					title={movie.title.replace(/ *\([^)]*\) */g, "")}
 					image={IMAGE_W185 + movie.poster_path}
+					onMovieClick={() => {
+						props.history.push(
+							`/movies/${slugify(
+								`${movie.id} ${movie.title.replace(/ *\([^)]*\) */g, "")}`,
+								{
+									replacement: "-",
+									lower: true,
+								}
+							)}`
+						);
+					}}
 				/>
 			));
 		}

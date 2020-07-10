@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import withStyles from "../../style/MovieCard";
 
 const MovieCard = (props) => {
-	const { title, description, image, actions } = props;
+	const { title, description, image, actions, onMovieClick } = props;
 	const classes = withStyles(props);
 	return (
 		<Card
@@ -21,9 +21,7 @@ const MovieCard = (props) => {
 				classes={{
 					root: classes.cardActionArea,
 				}}
-				onClick={() => {
-					console.log("heloo");
-				}}
+				onClick={onMovieClick}
 			>
 				<CardMedia
 					component="img"
