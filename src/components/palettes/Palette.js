@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
-import slugify from "slugify";
 import useSnack from "../../hooks/useSnack";
 import { IMAGE_W185 } from "../../data/Constants";
 import Button from "@material-ui/core/Button";
@@ -39,15 +38,7 @@ const Palette = (props) => {
 					title={movie.title.replace(/ *\([^)]*\) */g, "")}
 					image={IMAGE_W185 + movie.poster_path}
 					onMovieClick={() => {
-						props.history.push(
-							`/movies/${slugify(
-								`${movie.id} ${movie.title.replace(/ *\([^)]*\) */g, "")}`,
-								{
-									replacement: "-",
-									lower: true,
-								}
-							)}`
-						);
+						props.history.push(`/movies/${movie.id}`);
 					}}
 				/>
 			));

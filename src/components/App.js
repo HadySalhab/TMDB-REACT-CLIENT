@@ -14,7 +14,7 @@ const App = () => {
 				<Route exact path="/" component={Home} />
 				<Route exact path="/palette/new" component={Create} />
 				<Route exact path="/palette/:id" component={Palette} />
-				<Route exact path="/movies/:movieName" component={Movie} />
+				<Route exact path="/movies/:movieId" component={Movie} />
 				<Route component={NotFound} />
 			</Switch>
 		</BrowserRouter>
