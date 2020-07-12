@@ -81,7 +81,6 @@ const Create = (props) => {
 		));
 	};
 	const renderLoading = () => {
-		console.log(loading);
 		return (
 			<div className={classes.progress}>
 				<CircularProgress
