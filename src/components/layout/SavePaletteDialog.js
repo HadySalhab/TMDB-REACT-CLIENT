@@ -27,9 +27,9 @@ function SavePaletteDialog(props) {
 		});
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const result = trigger("paletteNameInput");
+		const result = await trigger("paletteNameInput");
 		if (result) {
 			setContent("emoji");
 		} else {
