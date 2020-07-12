@@ -20,7 +20,7 @@ const Movie = (props) => {
 		return () => {
 			resetMovie();
 		};
-	}, [id, getMovie]);
+	}, [resetMovie, id, getMovie]);
 	const { classes } = props;
 	const { movie, loading, alert } = props.movie;
 	const renderLoading = () => {
@@ -81,19 +81,17 @@ const Movie = (props) => {
 		);
 	};
 	const renderAlert = () => {
-		if (alert) {
-			return (
-				<Alert
-					classes={{
-						root: classes.alert,
-						message: classes.alertMessage,
-					}}
-					severity={alert.type}
-				>
-					{alert.message}
-				</Alert>
-			);
-		}
+		return (
+			<Alert
+				classes={{
+					root: classes.alert,
+					message: classes.alertMessage,
+				}}
+				severity={alert.type}
+			>
+				{alert.message}
+			</Alert>
+		);
 	};
 
 	return (

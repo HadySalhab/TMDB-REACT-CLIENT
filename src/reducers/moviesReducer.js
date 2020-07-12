@@ -1,35 +1,35 @@
 import {
-	GET_MOVIE,
-	LOADING_MOVIE,
-	ALERT_MOVIE,
-	REMOVE_ALERT_MOVIE,
-	RESET_MOVIE,
+	SEARCH_MOVIES,
+	LOADING_MOVIES,
+	ALERT_MOVIES,
+	REMOVE_ALERT_MOVIES,
+	RESET_MOVIES,
 } from "../actions/types";
 
-const movieState = {
-	movie: null,
+const moviesState = {
+	movies: [],
 	loading: false,
 	alert: null,
 };
-export default (state = movieState, action) => {
+export default (state = moviesState, action) => {
 	switch (action.type) {
-		case GET_MOVIE:
+		case SEARCH_MOVIES:
 			return {
 				...state,
-				movie: action.payload,
+				movies: action.payload,
 				loading: false,
 				alert: null,
 			};
-		case LOADING_MOVIE:
+		case LOADING_MOVIES:
 			return { ...state, loading: true, alert: null };
-		case ALERT_MOVIE:
+		case ALERT_MOVIES:
 			return { ...state, loading: false, alert: action.payload };
-		case REMOVE_ALERT_MOVIE:
+		case REMOVE_ALERT_MOVIES:
 			return { ...state, alert: null };
-		case RESET_MOVIE:
+		case RESET_MOVIES:
 			return {
 				...state,
-				movie: null,
+				movies: null,
 				loading: false,
 				alert: null,
 			};

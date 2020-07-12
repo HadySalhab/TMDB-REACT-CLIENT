@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { withStyles } from "@material-ui/styles";
 import useSnack from "../../hooks/useSnack";
 import { IMAGE_W185 } from "../../data/Constants";
@@ -14,7 +14,7 @@ import { sortMoviesBy } from "../../util/sortMoviesBy";
 import MovieCard from "../movies/MovieCard";
 
 const Palette = (props) => {
-	const { classes, getPalettes } = props;
+	const { classes, getPalettes, palette } = props;
 	const [sort, setSort] = useState("Original");
 	const { isOpen, showSnack, hideSnack } = useSnack(false);
 
@@ -55,6 +55,10 @@ const Palette = (props) => {
 		}
 	};
 
+	if (palette === "Not Found") {
+		return <Redirect to="/" />;
+	}
+
 	return (
 		<div className={classes.root}>
 			<Navbar>
@@ -64,7 +68,7 @@ const Palette = (props) => {
 						variant="contained"
 						color="secondary"
 					>
-						Movie Palette
+						Movie Palettes
 					</Button>
 				</Link>
 				<Spinner
@@ -96,8 +100,11 @@ const Palette = (props) => {
 	);
 };
 const mapStateToProps = (state, ownProps) => {
+	const palette = state.palettes.find(
+		(el) => el.id === ownProps.match.params.id
+	);
 	return {
-		palette: state.palettes.find((el) => el.id === ownProps.match.params.id),
+		palette: palette === undefined ? "Not Found" : palette,
 	};
 };
 const StyledPalette = withStyles(styles)(Palette);

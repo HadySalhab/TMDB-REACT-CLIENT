@@ -2,6 +2,8 @@ import { makeStyles } from "@material-ui/core/styles";
 const withStyles = makeStyles({
 	card: {
 		width: "100%",
+		display: "flex",
+		flexDirection: "column",
 	},
 	cardActionArea: {
 		height: "100%",

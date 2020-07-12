@@ -19,7 +19,8 @@ const PaletteItem = ({
 }) => {
 	const { isOpen, showDialog, hideDialog } = useDialog();
 	const renderMovies = () => {
-		return movies.map((movie) => {
+		const results = Object.keys(movies).map((i) => movies[i]);
+		return results.map((movie) => {
 			return (
 				<div
 					key={movie.id}

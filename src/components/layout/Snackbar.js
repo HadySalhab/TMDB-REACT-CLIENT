@@ -3,13 +3,15 @@ import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
 
-const MSnackbar = ({ open, duration, msgComp, onClose, onClick }) => {
+const MSnackbar = (props) => {
+	const { open, duration, msgComp, onClose, onClick, onEntered } = props;
 	return (
 		<Snackbar
 			anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
 			open={open}
 			autoHideDuration={duration}
 			message={msgComp}
+			onEntered={onEntered}
 			ContentProps={{
 				"aria-describedby": "message-id",
 			}}
@@ -24,7 +26,9 @@ const MSnackbar = ({ open, duration, msgComp, onClose, onClick }) => {
 					<CloseIcon />
 				</IconButton>,
 			]}
-		/>
+		>
+			{props.children}
+		</Snackbar>
 	);
 };
 

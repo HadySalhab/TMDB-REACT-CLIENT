@@ -18,7 +18,7 @@ export default class TmdbClient {
 		);
 		return movieResponse.data;
 	}
-	async searchMovie(query) {
+	async searchMovies(query) {
 		const movieResponse = await axios.get(
 			`https://api.themoviedb.org/3/search/movie/`,
 			{
